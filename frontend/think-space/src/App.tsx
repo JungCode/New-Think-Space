@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, useUser } from "@clerk/clerk-react";
-import Landing from "./pages/Landing";
+import Landing from "./pages/LandingPage.tsx";
 import DashBoard from "./pages/DashBoard/DashBoard.tsx";
 import {
   createBrowserRouter,

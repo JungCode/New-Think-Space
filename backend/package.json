@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "tsx src/server.ts",
+    "dev": "tsx src/server.ts",
     "test": "vitest",
     "build": "tsc -b",
     "test:ui": "vitest --ui"
