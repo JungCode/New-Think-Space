@@ -64,9 +64,18 @@ jobs:
         run: npm install -g @railway/cli
         working-directory: backend
 
-      - name: Deploy to Railway
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: |
-          npx railway up --environment production --service Think-Space-Back-End
-        working-directory: backend
+      # Phần deploy sang EC2 thay vì Railway
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.EC2_HOST }} # Địa chỉ IP hoặc domain của EC2
+          username: ${{ secrets.EC2_USER }} # Tên user SSH (ví dụ: ec2-user)
+          key: ${{ secrets.EC2_SSH_KEY }} # Private key SSH (được lưu trong GitHub Secrets)
+          port: ${{ secrets.EC2_PORT }} # Cổng SSH (mặc định 22)
+          script: |
+            cd /Think-Space/backend               # Đường dẫn tới thư mục backend trên EC2
+            git pull origin main                   # Cập nhật code mới nhất
+            npm install --production               # Cài đặt các package cần thiết
+            npm run build --if-present             # Build nếu có
+            # Khởi động lại ứng dụng, ví dụ dùng PM2:
+            pm2 restart my-app || pm2 start npm --name my-app -- run start
