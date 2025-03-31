@@ -11,7 +11,7 @@ interface Document {
 export const createANewDocument = async (token: string) => {
   try {
     const response = await axios.post<{ documentId: string }>(
-      "https://think-space-back-end-production.up.railway.app/documents",
+      "https://3.25.57.70:3000/documents",
       {
         title: "New page",
       },
@@ -32,7 +32,7 @@ export const createANewDocument = async (token: string) => {
 export const getUserDocuments = async (token: string): Promise<Document[]> => {
   try {
     const response = await axios.get<Document[]>(
-      "https://think-space-back-end-production.up.railway.app/documents/user",
+      "https://3.25.57.70:3000/documents/user",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ export const useOwner = async (
   // Fetch the room owner
   try {
     const response = await axios.get<{ owner: string }>(
-      `https://think-space-back-end-production.up.railway.app/documents/${roomId}`,
+      `https://3.25.57.70:3000/documents/${roomId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ export const useOwner = async (
 export const deleteADocument = async (documentId: string, token: string) => {
   try {
     const response = await axios.delete(
-      `https://think-space-back-end-production.up.railway.app/documents/${documentId}`,
+      `https://3.25.57.70:3000/documents/${documentId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ export const updateADocument = async (
 ) => {
   try {
     const response = await axios.patch(
-      `https://think-space-back-end-production.up.railway.app/documents/${documentId}`,
+      `https://3.25.57.70:3000/documents/${documentId}`,
       {
         document,
       },
@@ -116,7 +116,7 @@ export const inviteAUserToRoom = async (
 ) => {
   try {
     const response = await axios.post<{ roomRes: string }>(
-      `https://think-space-back-end-production.up.railway.app/rooms/${roomId}`,
+      `https://3.25.57.70:3000/rooms/${roomId}`,
       {
         email,
         title,
@@ -135,7 +135,7 @@ export const inviteAUserToRoom = async (
 };
 export const saveAUser = async (email: string, username: string) => {
   try {
-    const response = await axios.post(`https://think-space-back-end-production.up.railway.app/`, {
+    const response = await axios.post(`https://3.25.57.70:3000/`, {
       username: username,
       email: email,
     });
@@ -148,7 +148,7 @@ export const saveAUser = async (email: string, username: string) => {
 export const getSharedDocuments = async (token: string, userId: string) => {
   try {
     const response = await axios.get<Document[]>(
-      `https://think-space-back-end-production.up.railway.app/rooms/${userId}`,
+      `https://3.25.57.70:3000/rooms/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -164,7 +164,7 @@ export const getSharedDocuments = async (token: string, userId: string) => {
 export const getSharedRoomsbyUserId = async (token: string, userId: string) => {
   try {
     const response = await axios.get<Document[]>(
-      `https://think-space-back-end-production.up.railway.app/rooms/${userId}`,
+      `https://3.25.57.70:3000/rooms/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -181,7 +181,7 @@ export const getSharedRoomsbyUserId = async (token: string, userId: string) => {
 export const getUsersByRoom = async (roomId: string, token: string) => {
   try {
     const response = await axios.get<Document[]>(
-      `https://think-space-back-end-production.up.railway.app/byRoom/${roomId}`,
+      `https://3.25.57.70:3000/byRoom/${roomId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -202,7 +202,7 @@ export const removeARoom = async (
 ) => {
   try {
     const response = await axios.post(
-      `https://think-space-back-end-production.up.railway.app/rooms/removeARoom/${roomId}`,
+      `https://3.25.57.70:3000/rooms/removeARoom/${roomId}`,
       {
         userEmail,
       },
@@ -224,7 +224,7 @@ export const askAIQuestion = async (
   setSummary: React.Dispatch<React.SetStateAction<string>>
 ) => {
   try {
-    const response = await fetch("https://think-space-back-end-production.up.railway.app/askAIQuestion", {
+    const response = await fetch("https://3.25.57.70:3000/askAIQuestion", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -265,7 +265,7 @@ export const chatToDocument = async (
 ) => {
   try {
     const response = await fetch(
-      "https://think-space-back-end-production.up.railway.app/askAIQuestion/chatToDocument",
+      "https://3.25.57.70:3000/askAIQuestion/chatToDocument",
       {
         method: "POST",
         headers: {
