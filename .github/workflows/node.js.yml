@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build-and-deploy:
@@ -14,92 +14,68 @@ jobs:
         node-version: [18.x, 20.x, 22.x]
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    # Bước cho frontend
-    - name: Cache npm dependencies for frontend
-      uses: actions/cache@v3
-      with:
-        path: frontend/think-space/node_modules
-        key: ${{ runner.os }}-node-${{ matrix.node-version }}-frontend
-        restore-keys: |
-          ${{ runner.os }}-node-${{ matrix.node-version }}-
+      # Bước cho backend
+      - name: Cache npm dependencies for backend
+        uses: actions/cache@v3
+        with:
+          path: backend/node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-backend
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
 
-    - name: Install frontend dependencies
-      run: npm ci
-      working-directory: frontend/think-space
+      - name: Install backend dependencies
+        run: npm ci
+        working-directory: backend
 
-    - name: Run frontend tests
-      run: npm test
-      working-directory: frontend/think-space
+      - name: Create .env file for backend
+        run: |
+          echo FIREBASE_TYPE=${{ secrets.FIREBASE_TYPE }} >> backend/.env
+          echo FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }} >> backend/.env
+          echo FIREBASE_PRIVATE_KEY_ID=${{ secrets.FIREBASE_PRIVATE_KEY_ID }} >> backend/.env
+          echo FIREBASE_PRIVATE_KEY="${{ secrets.FIREBASE_PRIVATE_KEY }}" >> backend/.env
+          echo FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }} >> backend/.env
+          echo FIREBASE_CLIENT_ID=${{ secrets.FIREBASE_CLIENT_ID }} >> backend/.env
+          echo FIREBASE_AUTH_URI=${{ secrets.FIREBASE_AUTH_URI }} >> backend/.env
+          echo FIREBASE_TOKEN_URI=${{ secrets.FIREBASE_TOKEN_URI }} >> backend/.env
+          echo FIREBASE_AUTH_PROVIDER_CERT_URL=${{ secrets.FIREBASE_AUTH_PROVIDER_CERT_URL }} >> backend/.env
+          echo FIREBASE_CLIENT_CERT_URL=${{ secrets.FIREBASE_CLIENT_CERT_URL }} >> backend/.env
+          echo LIVEBLOCKS_SECRET_KEY=${{ secrets.LIVEBLOCKS_SECRET_KEY }} >> backend/.env
+          echo CLERK_PUBLISHABLE_KEY=${{ secrets.CLERK_PUBLISHABLE_KEY }} >> backend/.env
+          echo CLERK_SECRET_KEY=${{ secrets.CLERK_SECRET_KEY }} >> backend/.env
+          echo AI_API_KEY=${{ secrets.AI_API_KEY }} >> backend/.env
+        shell: bash
 
-    - name: Install Vercel CLI
-      run: npm install --global vercel@latest
+      - name: Build backend application
+        run: npm run build --if-present
+        working-directory: backend
 
-    - name: Pull Vercel Environment Information for frontend
-      run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      working-directory: frontend/think-space
+      - name: Run backend tests
+        run: npm test
+        working-directory: backend
 
-    - name: Build Project Artifacts for frontend
-      run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      working-directory: frontend/think-space
+      - name: Install railway
+        run: npm install -g @railway/cli
+        working-directory: backend
 
-    - name: Deploy Project Artifacts to Vercel for frontend
-      run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-      working-directory: frontend/think-space
-
-    # Bước cho backend
-    - name: Cache npm dependencies for backend
-      uses: actions/cache@v3
-      with:
-        path: backend/node_modules
-        key: ${{ runner.os }}-node-${{ matrix.node-version }}-backend
-        restore-keys: |
-          ${{ runner.os }}-node-${{ matrix.node-version }}-
-
-    - name: Install backend dependencies
-      run: npm ci
-      working-directory: backend
-
-    - name: Create .env file for backend
-      run: |
-        echo FIREBASE_TYPE=${{ secrets.FIREBASE_TYPE }} >> backend/.env
-        echo FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }} >> backend/.env
-        echo FIREBASE_PRIVATE_KEY_ID=${{ secrets.FIREBASE_PRIVATE_KEY_ID }} >> backend/.env
-        echo FIREBASE_PRIVATE_KEY="${{ secrets.FIREBASE_PRIVATE_KEY }}" >> backend/.env
-        echo FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }} >> backend/.env
-        echo FIREBASE_CLIENT_ID=${{ secrets.FIREBASE_CLIENT_ID }} >> backend/.env
-        echo FIREBASE_AUTH_URI=${{ secrets.FIREBASE_AUTH_URI }} >> backend/.env
-        echo FIREBASE_TOKEN_URI=${{ secrets.FIREBASE_TOKEN_URI }} >> backend/.env
-        echo FIREBASE_AUTH_PROVIDER_CERT_URL=${{ secrets.FIREBASE_AUTH_PROVIDER_CERT_URL }} >> backend/.env
-        echo FIREBASE_CLIENT_CERT_URL=${{ secrets.FIREBASE_CLIENT_CERT_URL }} >> backend/.env
-        echo LIVEBLOCKS_SECRET_KEY=${{ secrets.LIVEBLOCKS_SECRET_KEY }} >> backend/.env
-        echo CLERK_PUBLISHABLE_KEY=${{ secrets.CLERK_PUBLISHABLE_KEY }} >> backend/.env
-        echo CLERK_SECRET_KEY=${{ secrets.CLERK_SECRET_KEY }} >> backend/.env
-        echo AI_API_KEY=${{ secrets.AI_API_KEY }} >> backend/.env
-      shell: bash
-
-
-    - name: Build backend application
-      run: npm run build --if-present
-      working-directory: backend
-
-    - name: Run backend tests
-      run: npm test
-      working-directory: backend
-
-    - name: Install railway
-      run: npm install -g @railway/cli
-      working-directory: backend
-
-    - name: Deploy to Railway
-      env:
-        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-      run: |
-        npx railway up --environment production --service Think-Space-Back-End
-      working-directory: backend
+      # Phần deploy sang EC2 thay vì Railway
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.EC2_HOST }} # Địa chỉ IP hoặc domain của EC2
+          username: ${{ secrets.EC2_USER }} # Tên user SSH (ví dụ: ec2-user)
+          key: ${{ secrets.EC2_SSH_KEY }} # Private key SSH (được lưu trong GitHub Secrets)
+          port: ${{ secrets.EC2_PORT }} # Cổng SSH (mặc định 22)
+          script: |
+            cd /Think-Space/backend               # Đường dẫn tới thư mục backend trên EC2
+            git pull origin main                   # Cập nhật code mới nhất
+            npm install --production               # Cài đặt các package cần thiết
+            npm run build --if-present             # Build nếu có
+            # Khởi động lại ứng dụng, ví dụ dùng PM2:
+            pm2 restart my-app || pm2 start npm --name my-app -- run start
