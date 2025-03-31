@@ -1,7 +1,14 @@
 import app from "./app";
+import https from "https";
+import fs from "fs";
 
 const port = Number(process.env.PORT) || 3000;
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+const options = {
+    key: fs.readFileSync('/etc/ssl/private/key.pem'),
+    cert: fs.readFileSync('/etc/ssl/private/cert.pem')
+};
+
+https.createServer(options, app).listen(port, () => {
+    console.log('Server running on HTTPS',port);
 });
