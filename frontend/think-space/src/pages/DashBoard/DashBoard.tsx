@@ -1,7 +1,7 @@
-import { useAuth, useUser } from "@clerk/clerk-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useAuth, useUser } from '@clerk/clerk-react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   createANewDocument,
   deleteADocument,
@@ -9,8 +9,8 @@ import {
   getUserDocuments,
   saveAUser,
   updateADocument,
-} from "@/api";
-import SidebarMain from "./Sidebar_subComponents/SidebarMain";
+} from '@/api';
+import SidebarMain from './Sidebar_subComponents/SidebarMain';
 
 interface Document {
   id: string;
@@ -25,10 +25,11 @@ const DashBoard = () => {
   const { getToken } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
+  console.log(documents);
   useEffect(() => {
     saveAUser(
-      user?.primaryEmailAddress?.emailAddress || "",
-      user?.username || ""
+      user?.primaryEmailAddress?.emailAddress || '',
+      user?.username || '',
     );
     const fetchDocuments = async () => {
       try {
@@ -38,7 +39,7 @@ const DashBoard = () => {
         setDocuments(data);
         const sharedDocuments = await getSharedRoomsbyUserId(
           token,
-          user?.primaryEmailAddress?.emailAddress || ""
+          user?.primaryEmailAddress?.emailAddress || '',
         );
         setSharedDocuments(sharedDocuments);
       } catch (err) {
@@ -58,7 +59,7 @@ const DashBoard = () => {
         ...prev,
         {
           id: docId,
-          title: "New page",
+          title: 'New page',
         },
       ]);
     } catch (err) {
@@ -69,17 +70,18 @@ const DashBoard = () => {
     const token = await getToken();
     if (token) {
       const data = await deleteADocument(id, token);
-      if(data){}
+      if (data) {
+      }
       setDocuments((prev) => prev.filter((doc) => doc.id !== id));
-      if (params.id == id) navigate("/home");
+      if (params.id == id) navigate('/home');
     } else {
-      console.error("Token is null");
+      console.error('Token is null');
     }
-    navigate("/home");
+    navigate('/home');
   };
   const getTitle = (id: string) => {
-    const doc = [...documents,...sharedDocuments].find((doc) => doc.id === id);
-    return doc?.title || "Untitled";
+    const doc = [...documents, ...sharedDocuments].find((doc) => doc.id === id);
+    return doc?.title || 'Untitled';
   };
   const updateADocumentTitle = async (id: string, title: string) => {
     const token = await getToken();
@@ -88,7 +90,7 @@ const DashBoard = () => {
       await updateADocument(
         id,
         { id: id, title: title, updatedAt: new Date().toISOString() },
-        token
+        token,
       );
       setDocuments((prev) =>
         prev.map((doc) => {
@@ -99,10 +101,10 @@ const DashBoard = () => {
             };
           }
           return doc;
-        })
+        }),
       );
     } else {
-      console.error("Token is null");
+      console.error('Token is null');
     }
   };
   return (
@@ -115,9 +117,9 @@ const DashBoard = () => {
         getToken={getToken}
         getTitle={getTitle}
         user={{
-          fullName: user.fullName || "",
+          fullName: user.fullName || '',
           primaryEmailAddress: {
-            emailAddress: user.primaryEmailAddress?.emailAddress || "",
+            emailAddress: user.primaryEmailAddress?.emailAddress || '',
           },
           imageUrl: user.imageUrl,
         }}

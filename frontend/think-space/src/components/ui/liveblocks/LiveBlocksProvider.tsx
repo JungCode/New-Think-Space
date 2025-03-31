@@ -1,7 +1,7 @@
-import { useUser } from "@clerk/clerk-react";
-import { LiveblocksProvider } from "@liveblocks/react/suspense";
-import { ReactNode } from "react";
-import { useParams } from "react-router-dom";
+import { useUser } from '@clerk/clerk-react';
+import { LiveblocksProvider } from '@liveblocks/react/suspense';
+import { ReactNode } from 'react';
+import { useParams } from 'react-router-dom';
 
 interface LiveBlocksProviderProps {
   children: ReactNode;
@@ -23,22 +23,19 @@ const LiveBlocksProvider = ({
       key={roomId}
       authEndpoint={async () => {
         const token = await getToken();
-        const response = await fetch(
-          "https://think-space-back-end-production.up.railway.app/auth-endpoint",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              roomId,
-              userId: userId,
-              username: username,
-              avatar
-            }),
-          }
-        );
+        const response = await fetch('https://3.25.57.70:3000/auth-endpoint', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            roomId,
+            userId: userId,
+            username: username,
+            avatar,
+          }),
+        });
         const data = await response.json();
         return { token: data };
       }}
