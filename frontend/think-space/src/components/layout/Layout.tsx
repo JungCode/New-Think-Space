@@ -10,7 +10,7 @@ import {
   saveAUser,
   updateADocument,
 } from '@/api';
-import SidebarMain from './Sidebar_subComponents/SidebarMain';
+import SidebarMain from './sidebar/SidebarMain';
 
 interface Document {
   id: string;
