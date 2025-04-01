@@ -4,70 +4,39 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-// Add CardContent if needed!
+} from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 interface AppSidebarProps {
   user: {
     imageUrl: string;
     name: string;
   };
 }
-// Nice
-
-const Cards = [
-  {
-    title: "👾",
-    description: "Testing card",
-    lastUsedBy: "user",
-    lastHours: "2 hours ago",
-  },
-  {
-    title: "👾",
-    description: "Testing card",
-    lastUsedBy: "user",
-    lastHours: "2 hours ago",
-  },
-  {
-    title: "👾",
-    description: "Testing card",
-    lastUsedBy: "user",
-    lastHours: "2 hours ago",
-  },
-  {
-    title: "👾",
-    description: "Testing card",
-    lastUsedBy: "user",
-    lastHours: "2 hours ago",
-  },
-  {
-    title: "👾",
-    description: "Testing card",
-    lastUsedBy: "user",
-    lastHours: "2 hours ago",
-  },
-  {
-    title: "👾",
-    description: "Testing card",
-    lastUsedBy: "user",
-    lastHours: "2 hours ago",
-  },
-  {
-    title: "👾",
-    description: "Testing card",
-    lastUsedBy: "user",
-    lastHours: "2 hours ago",
-  },
-];
 
 const RecentlyVisited = ({ user }: AppSidebarProps) => {
+  const Cards = [
+    { title: '👾', description: 'Testing card', lastHours: '2 hours ago' },
+    { title: '👾', description: 'Testing card', lastHours: '2 hours ago' },
+    { title: '👾', description: 'Testing card', lastHours: '2 hours ago' },
+    { title: '👾', description: 'Testing card', lastHours: '2 hours ago' },
+    { title: '👾', description: 'Testing card', lastHours: '2 hours ago' },
+    { title: '👾', description: 'Testing card', lastHours: '2 hours ago' },
+    { title: '👾', description: 'Testing card', lastHours: '2 hours ago' },
+  ];
+
   return (
-    <div className="flex flex-row justify-center gap-3">
+    <div className="flex flex-row justify-center gap-3 ">
       {Cards.map((item, index) => (
-        <Card className="w-36 h-36" key={index}>
+        <Card
+          key={index}
+          className="max-w-36 aspect-square card__container flex flex-col justify-between"
+        >
           <CardHeader>
-            <CardTitle>{item.title}</CardTitle>
-            <CardDescription>{item.description}</CardDescription>
+            <CardTitle className="mt-2">{item.title}</CardTitle>
+            <CardDescription className="font-bold text-ellipsis w-full h-4 overflow-hidden">
+              {item.description}
+            </CardDescription>
           </CardHeader>
           <CardFooter className="gap-2 text-gray-600">
             <Avatar className="w-5 h-5">

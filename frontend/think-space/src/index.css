@@ -85,3 +85,19 @@ body{
     @apply bg-background text-foreground;
     }
 }
+
+@media screen and (max-width: 1380px) {
+  .card__container:nth-last-child(-n+1){
+    display: none;
+  }  
+}
+@media screen and (max-width: 1080px) {
+  .card__container:nth-last-child(-n+3){
+    display: none;
+  }  
+}
+@media screen and (max-width: 780px) {
+  .card__container:nth-last-child(-n+5){
+    display: none;
+  }  
+}
