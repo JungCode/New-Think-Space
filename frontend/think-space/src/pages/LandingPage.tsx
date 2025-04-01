@@ -1,7 +1,7 @@
-import Header from '../components/layout/Header';
-import HeroSection from '../components/layout/HeroSection';
-import FeaturesSection from '../components/features/FeaturesSection';
-import WindowControls from '../components/layout/WindowControls';
+import Header from '../components/lading/Header';
+import HeroSection from '../components/lading/HeroSection';
+import FeaturesSection from '../components/lading/FeaturesSection';
+import WindowControls from '../components/lading/WindowControls';
 import Logo from '../assets/LetterT.svg';
 
 const Landing = () => {

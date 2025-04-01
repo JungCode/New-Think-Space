@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 
 import {
   Bot,
@@ -13,11 +13,11 @@ import {
   File,
   UsersRound,
   Pen,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { NavMain } from "./nav-main";
-import { NavMisc } from "@/pages/DashBoard/Sidebar_subComponents/nav-misc";
-import { NavUser } from "@/pages/DashBoard/Sidebar_subComponents/nav-user";
+import { NavMain } from './nav-main';
+import { NavMisc } from '@/components/layout/sidebar/nav-misc';
+import { NavUser } from '@/components/layout/sidebar/nav-user';
 
 import {
   Sidebar,
@@ -25,67 +25,67 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 // This is sample data.
 const data = {
   navMain: [
     {
-      title: "Search",
-      url: "#",
+      title: 'Search',
+      url: '#',
       icon: Search,
     },
     {
-      title: "ThinkSpace AI",
-      url: "/chat",
+      title: 'ThinkSpace AI',
+      url: '/chat',
       icon: Bot,
     },
     {
-      title: "Home",
-      url: "/home",
+      title: 'Home',
+      url: '/home',
       icon: Home,
     },
     {
-      title: "Inbox",
-      url: "#",
+      title: 'Inbox',
+      url: '#',
       icon: Inbox,
     },
   ],
 
   navPrivate: [
     {
-      title: "Getting Started",
-      url: "getting-started",
+      title: 'Getting Started',
+      url: 'getting-started',
       icon: File,
       isActive: true,
       items: [],
     },
     {
-      title: "Scratchpad",
-      url: "scratchpad",
+      title: 'Scratchpad',
+      url: 'scratchpad',
       icon: Pen,
       items: [],
     },
     {
-      title: "1:1 notes",
-      url: "1-1-notes",
+      title: '1:1 notes',
+      url: '1-1-notes',
       icon: UsersRound,
       items: [],
     },
   ],
   navMisc: [
     {
-      title: "Help",
-      url: "#",
+      title: 'Help',
+      url: '#',
       icon: HelpCircle,
     },
     {
-      title: "Trash",
-      url: "#",
+      title: 'Trash',
+      url: '#',
       icon: Trash2,
     },
     {
-      title: "Settings",
-      url: "#",
+      title: 'Settings',
+      url: '#',
       icon: Cog,
     },
   ],
