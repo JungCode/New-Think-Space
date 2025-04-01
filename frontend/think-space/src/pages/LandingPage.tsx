@@ -6,7 +6,7 @@ import Logo from '../assets/LetterT.svg';
 
 const Landing = () => {
   return (
-    <div className="min-h-screen overflow-hidden md:gap-16 flex px-5 md:px-0 md:flex-row flex-col bg-gray-100 mx-auto max-w-[1920px] py-3">
+    <div className="min-h-screen overflow-hidden md:gap-16 flex px-5 md:px-0 md:flex-row flex-col bg-gray-100 mx-auto pb-10 max-w-[1920px] py-3">
       <div className="flex flex-col basis-5/12 justify-between md:py-16 md:ps-16">
         <Header />
         <HeroSection />
