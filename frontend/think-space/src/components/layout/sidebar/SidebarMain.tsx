@@ -1,12 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 // import { AppSidebar } from "@/pages/DashBoard/app-sidebar";
-import { AppSidebar } from "./app-sidebar";
+import { AppSidebar } from './app-sidebar';
 
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,9 +14,9 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import { Toaster } from "sonner";
+} from '@/components/ui/breadcrumb';
+import { Separator } from '@/components/ui/separator';
+import { Toaster } from 'sonner';
 
 const SidebarMain = ({
   user,
@@ -51,9 +51,9 @@ const SidebarMain = ({
           sharedDocuments={sharedDocuments}
           getToken={getToken}
           user={{
-            fullName: user.fullName || "",
-            emailAddress: user.primaryEmailAddress?.emailAddress || "",
-            imageUrl: user.imageUrl || "",
+            fullName: user.fullName || '',
+            emailAddress: user.primaryEmailAddress?.emailAddress || '',
+            imageUrl: user.imageUrl || '',
           }}
         />
       )}
@@ -66,20 +66,20 @@ const SidebarMain = ({
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="#">
-                    {location.pathname === "/home"
-                      ? "Home"
-                      : location.pathname === "/chat"
-                      ? "Chat"
-                      : "Document"}
+                    {location.pathname === '/home'
+                      ? 'Home'
+                      : location.pathname === '/chat'
+                      ? 'Chat'
+                      : 'Document'}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                {location.pathname != "/home" &&
-                location.pathname != "/chat" ? (
+                {location.pathname != '/home' &&
+                location.pathname != '/chat' ? (
                   <>
                     <BreadcrumbSeparator className="hidden md:block" />
                     <BreadcrumbItem>
                       <BreadcrumbPage>
-                        {location.pathname.replace(/^\//, "")}
+                        {location.pathname.replace(/^\//, '')}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
                   </>
@@ -89,7 +89,7 @@ const SidebarMain = ({
           </div>
         </header>
         <div className="flex flex-col flex-1 gap-4 p-4 pt-0">
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
+          <div className=" min-h-[100vh] flex-1 rounded-xl md:min-h-min">
             <Toaster position="top-center" />
             <Outlet
               context={{
