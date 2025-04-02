@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShapes } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => (
-  <header className="">
+  <header className="fade-in-up">
     <FontAwesomeIcon className="md:text-3xl text-md" icon={faShapes} />
     <h2
       className="md:text-3xl text-md font-bold inline-block ml-2"
