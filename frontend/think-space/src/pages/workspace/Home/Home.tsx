@@ -3,6 +3,7 @@ import RecentlyVisited from './Home_subComponents/RecentlyVisited';
 import UpcomingEvents from './Home_subComponents/UpcomingEvents';
 import SuggestedForYou from './Home_subComponents/SuggestedForYou';
 import Learn from './Home_subComponents/Learn';
+import HomeGreeding from './Home_subComponents/HomeGreeding';
 
 interface AppSidebarProps {
   user: {
@@ -35,22 +36,9 @@ const Home = ({ user }: AppSidebarProps) => {
     },
   ];
 
-  const getGreeting = () => {
-    const currentHour = new Date().getHours();
-    if (currentHour < 12) {
-      return 'Good morning';
-    } else if (currentHour < 18) {
-      return 'Good afternoon';
-    } else {
-      return 'Good evening';
-    }
-  };
-
   return (
     <div className="flex-col justify-center mt-0 max-w-full">
-      <h1 className="flex justify-center mb-20 text-3xl font-semibold">
-        {getGreeting()}, {user.name}
-      </h1>
+      <HomeGreeding user={user} />
       <div className="">
         <ul className="flex flex-col items-center">
           {mainItems.map((item, index) => (
@@ -58,7 +46,7 @@ const Home = ({ user }: AppSidebarProps) => {
               key={index}
               className="flex flex-col gap-2 mb-12 max-w-[1080px] w-full"
             >
-              <div className="flex items-center gap-2 text-gray-600">
+              <div className="flex items-center gap-2 text-gray-600 fade-in-up">
                 <item.icon size={12} />
                 <span className="text-xs font-medium">{item.title}</span>
               </div>
