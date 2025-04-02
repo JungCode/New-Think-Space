@@ -87,17 +87,27 @@ body{
 }
 
 @media screen and (max-width: 1380px) {
-  .card__container:nth-last-child(-n+1){
+  .recent-card__container:nth-last-child(-n+1){
+    display: none;
+  }
+  .learn-card__container:nth-last-child(-n+1){
     display: none;
   }  
 }
 @media screen and (max-width: 1080px) {
-  .card__container:nth-last-child(-n+3){
+  .recent-card__container:nth-last-child(-n+3){
+    display: none;
+  }  
+  .learn-card__container:nth-last-child(-n+2){
     display: none;
   }  
 }
-@media screen and (max-width: 780px) {
-  .card__container:nth-last-child(-n+5){
+@media screen and (max-width: 480px) {
+  .recent-card__container:nth-last-child(-n+4){
+    display: none;
+  }  
+  .learn-card__container:nth-last-child(-n+3){
     display: none;
   }  
 }
+

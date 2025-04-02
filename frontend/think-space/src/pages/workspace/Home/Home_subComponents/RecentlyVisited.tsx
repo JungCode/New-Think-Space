@@ -30,7 +30,7 @@ const RecentlyVisited = ({ user }: AppSidebarProps) => {
       {Cards.map((item, index) => (
         <Card
           key={index}
-          className="max-w-36 aspect-square card__container flex flex-col justify-between"
+          className="max-w-36 aspect-square recent-card__container flex flex-col justify-between"
         >
           <CardHeader>
             <CardTitle className="mt-2">{item.title}</CardTitle>
