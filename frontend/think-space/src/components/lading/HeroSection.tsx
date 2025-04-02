@@ -4,7 +4,7 @@ const HeroSection = () => {
   const { redirectToSignIn } = useClerk();
 
   return (
-    <main className="basis-1/3 md:my-0 my-10 flex md:items-start flex-col items-center">
+    <main className="basis-1/3 md:my-0 my-10 flex md:items-start flex-col items-center fade-in-up">
       <h1 className="text-5xl font-bold mb-10 md:max-w-sm md:text-start text-center">
         Build perfect docs, together.
       </h1>

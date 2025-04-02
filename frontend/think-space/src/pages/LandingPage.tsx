@@ -10,7 +10,7 @@ const Landing = () => {
       <div className="flex flex-col basis-5/12 justify-between md:py-16 md:ps-16">
         <Header />
         <HeroSection />
-        <figure className="grid items-end hidden md:flex">
+        <figure className="items-end hidden md:flex fade-in-up">
           <img
             src={Logo}
             alt="Think Space Logo"
@@ -18,7 +18,7 @@ const Landing = () => {
           />
         </figure>
       </div>
-      <section className="bg-white md:mt-16 mt-5 shadow-2xl rounded-3xl md:rounded-e-none w-full">
+      <section className="bg-white md:mt-16 mt-5 shadow-2xl rounded-3xl md:rounded-e-none w-full fade-in-left-to-right">
         <WindowControls />
         <FeaturesSection />
       </section>
