@@ -1,9 +1,45 @@
-# Think-Space
-This project is using ExpressJS and Vite, ReactJS
-## Run back-end first
-```cd backend```->
-```npm start```
-## Run front-end
-```cd frontend/think-space```->
-```npm run dev```
+# New-Think-Space
 
+New-Think-Space is a web application inspired by Notion, developed using **ExpressJS** for the backend and **ReactJS** with **Vite** for the frontend. It offers a dynamic and modern user experience, providing a robust platform for users to manage their notes and ideas.
+
+## Getting Started
+
+To get started, you'll need to set up both the backend and frontend environments.
+
+### Backend
+
+1. Navigate to the backend directory:
+    ```bash
+    cd backend
+    ```
+
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Start the backend server:
+    ```bash
+    npm start
+    ```
+
+### Frontend
+
+1. Navigate to the frontend directory:
+    ```bash
+    cd frontend/think-space
+    ```
+
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Start the development server:
+    ```bash
+    npm run dev
+    ```
+
+## Deployment
+
+The app is deployed on Vercel, and you can access it at: [New Think Space](https://new-think-space.vercel.app)
