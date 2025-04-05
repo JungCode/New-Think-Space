@@ -1,4 +1,5 @@
 # New-Think-Space
+> **Note**: Currently, SSL is not set up, so you may not be able to connect to my server. So if you want to use my demo please confirm the server link to use the web: [https://54.252.242.166](https://54.252.242.166)
 
 New-Think-Space is a web application inspired by Notion, developed using **ExpressJS** for the backend and **ReactJS** with **Vite** for the frontend. It offers a dynamic and modern user experience, providing a robust platform for users to manage their notes and ideas.
 
